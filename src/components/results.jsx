@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { ListGroup, ListGroupItem, Row, Col } from 'react-bootstrap'
+import moment from 'moment'
 import search from '../services/search'
 
 export default class Results extends Component {
@@ -28,12 +29,20 @@ export default class Results extends Component {
   render () {
     const results = this.state.results ? this.state.results.map((result) => (
       <ListGroupItem>
-        <a href={result.url}>
+        <a href={result.url} target='_blank'>
           <Row>
             <Col xs={10} md={10}>
-              <b>{result.outbound.to.city}, {result.outbound.to.country}</b>
-              <p>{result.outbound.from.airport}, {result.outbound.from.country} to {result.outbound.to.airport}, {result.outbound.to.country} - {result.outbound.departureDate}</p>
-              <p>{result.inbound.from.airport}, {result.inbound.from.country} to {result.inbound.to.airport}, {result.inbound.to.country} - {result.inbound.departureDate}</p>
+              <b>{result.outbound.to.city}, {result.outbound.to.country} {moment(result.outbound.departureDate).fromNow()}</b>
+              <p>
+                {moment(result.outbound.departureDate).format('dddd, MMMM Do YYYY')}
+                <br />
+                  {result.outbound.from.airport}, {result.outbound.from.country} to {result.outbound.to.airport}, {result.outbound.to.country}
+              </p>
+              <p>
+                {moment(result.inbound.departureDate).format('dddd, MMMM Do YYYY')}
+                <br />
+                {result.inbound.from.airport}, {result.inbound.from.country} to {result.inbound.to.airport}, {result.inbound.to.country}
+              </p>
             </Col>
             <Col xs={2} md={2}>
               {result.price} {result.currencyId}
