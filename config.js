@@ -2,7 +2,7 @@
 
 let config = {
   port: process.env.PORT || 3000,
-  host: process.env.YOLO_TIPS_HOST || 'localhost'
+  host: '0.0.0.0'
 }
 
 module.exports = config
