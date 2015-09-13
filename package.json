@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node .",
+    "clean": "rimraf dist",
+    "build": "npm run clean && webpack --colors --display-error-details --config webpack.production.config.js",
+    "start": "npm run build && NODE_ENV=production node .",
     "watch": "webpack --colors --display-error-details --config webpack.config.js && webpack-dev-server",
     "mon": "nodemon . --ignore dist --ignore client",
     "dev": "npm run watch & npm run mon",
-    "lint": "standard"
+    "lint": "standard --verbose | snazzy"
   },
   "repository": {
     "type": "git",
@@ -54,6 +56,9 @@
     "watchify": "^3.3.1",
     "webpack": "^1.12.0",
     "webpack-dev-server": "^1.10.1"
+  },
+  "engines": {
+    "node": ">=4.0.0"
   },
   "standard": {
     "parser": "babel-eslint",
