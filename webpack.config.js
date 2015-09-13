@@ -3,7 +3,7 @@ var webpack = require('webpack')
 module.exports = {
   devtool: 'source-map',
   resolve: {
-    extensions: ['', '.js', '.jsx', '.json']
+    extensions: ['', '.js', '.jsx']
   },
   entry: [
     'webpack-dev-server/client?http://localhost:8080',
