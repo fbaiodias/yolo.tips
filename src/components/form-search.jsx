@@ -25,7 +25,7 @@ export default class FormSearch extends Component {
       <form onSubmit={this.handleSubmit}>
         <Input ref='origin' label='I want to go from' type='text' defaultValue='LOND' />
         <Input ref='destination' label='and visit' type='text' defaultValue='EVERYWHERE'/>
-        <Input ref='weeks' min='1' max='10' label='in the next' type='number' defaultValue='5' addonAfter='weeks'/>
+        <Input ref='weeks' min='1' max='10' label='in the next' type='number' defaultValue='2' addonAfter='weeks'/>
         <Input ref='max' min='1' label='for a maximum of' type='number' defaultValue='100' addonAfter='€'/>
         <Button type='submit' bsStyle='primary' bsSize='large' block>Search</Button>
       </form>
