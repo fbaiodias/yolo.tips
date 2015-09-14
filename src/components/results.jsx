@@ -52,7 +52,7 @@ export default class Results extends Component {
                 </p>
               </Col>
               <Col xs={2} md={2}>
-                {result.price} {result.currencyId}
+                {Math.round(result.price)} {result.currencyId}
               </Col>
             </Row>
           </a>
