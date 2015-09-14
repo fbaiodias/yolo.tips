@@ -20,6 +20,10 @@ export default class Results extends Component {
     this.search(props.options)
   }
 
+  componentWillReceiveProps (nextProps) {
+    this.search(nextProps.options)
+  }
+
   search (options) {
     search(options)
       .then((results) => this.setState({ results }))
