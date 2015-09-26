@@ -2,17 +2,11 @@ import values from 'lodash.mapvalues'
 import React, { Component, PropTypes } from 'react'
 import { Input, Button, DropdownButton, MenuItem } from 'react-bootstrap'
 import Select from 'react-select'
-import uniq from 'lodash.uniq'
 import currencies from '../consts/currencies'
+import nearestAirport from '../services/nearest-airport'
+import places from '../consts/airports'
 
 import 'react-select/dist/default.css'
-
-const airportCodes = require('airport-codes/airports.json')
-
-const places = uniq(airportCodes.map(({ name, city, country, iata }) =>
-  ({ label: `${name} Airport, ${city}, ${country}`, value: iata })), 'value')
-
-console.log('places', places)
 
 export default class FormSearch extends Component {
   static propTypes = {
@@ -30,8 +24,15 @@ export default class FormSearch extends Component {
     }
   }
 
+  componentWillMount() {
+    nearestAirport().then((airport) => {
+      this.setState({ origin: airport.iata })
+      console.log('nearest airport is', airport)
+    })
+  }
+
   handleSubmit (e) {
-    e.preventDefault()
+    e && e.preventDefault()
     const options = values(this.refs, (value) => (value.getValue && value.getValue()))
     options.currency = this.state.currency.value
     options.origin = this.state.origin
