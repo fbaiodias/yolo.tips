@@ -18,14 +18,14 @@ export default (function () {
       (placeArr.filter(({ name }) => name.toLowerCase() === 'all airports')[0] || placeArr[0]))
 
   const presentAirport = ({ name, city, country, iata, latitude, longitude }) => ({
-    label: name.toLowerCase() !== 'all airports' ?
-      `${name} (${ iata.toUpperCase() }), ${city}, ${country}` :
-      `${city}, ${country}`,
+    label: name.toLowerCase() !== 'all airports'
+      ? `${name} (${ iata.toUpperCase() }), ${city}, ${country}`
+      : `${city}, ${country}`,
     value: iata,
     iata,
     latitude,
     longitude
-  });
+  })
 
   return uniq(airportCodes.map(presentAirport), 'value')
 }())

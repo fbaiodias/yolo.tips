@@ -8,6 +8,12 @@ import places from '../consts/airports'
 
 import 'react-select/dist/default.css'
 
+const MAX_OPTIONS = 20
+
+const options = places.map(({ label, value }) => ({ label, value }))
+
+console.log('options', options)
+
 export default class FormSearch extends Component {
   static propTypes = {
     onSubmit: PropTypes.func
@@ -24,7 +30,7 @@ export default class FormSearch extends Component {
     }
   }
 
-  componentWillMount() {
+  componentWillMount () {
     nearestAirport().then((airport) => {
       this.setState({ origin: airport.iata })
       console.log('nearest airport is', airport)
@@ -61,9 +67,22 @@ export default class FormSearch extends Component {
       </DropdownButton>
     )
 
+    const filterOptions = (opts, filterValue, exclude) => {
+      const filterOption = (op) => {
+        const valueTest = String(op.value).toLowerCase()
+        const labelTest = String(op.label).toLowerCase()
+
+        filterValue = filterValue.toLowerCase()
+
+        return !filterValue || valueTest.indexOf(filterValue) >= 0 || labelTest.indexOf(filterValue) >= 0
+      }
+
+      return (opts || []).filter(filterOption).slice(0, MAX_OPTIONS)
+    }
+
     return (
       <form onSubmit={this.handleSubmit}>
-        <Select ref='origin' options={places} value={this.state.origin} onChange={this.handleOriginChange} label='I want to go from' searchable />
+        <Select ref='origin' options={options} value={this.state.origin} filterOptions={filterOptions} onChange={this.handleOriginChange} label='I want to go from' searchable />
         <Input ref='weeks' min='1' max='10' label='in the next' type='number' defaultValue='2' addonAfter='weeks' />
         <Input ref='max' min='1' label='for a maximum of' type='number' defaultValue='100' buttonAfter={innerDropdown} />
         <Button type='submit' bsStyle='primary' bsSize='large' block>Search</Button>
