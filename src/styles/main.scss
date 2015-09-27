@@ -9,6 +9,7 @@ $icon-font-path: "/fonts/bootstrap/";
 
   img {
     max-width: 50%;
+    padding: 0.2em;
   }
 
   span {
@@ -16,6 +17,16 @@ $icon-font-path: "/fonts/bootstrap/";
     font-weight: bold;
     vertical-align: middle;
     margin-left: -0.3em;
+  }
+
+  small {
+    font-weight: 100;
+    padding-top: 8vw;
+    vertical-align: middle;
+    display: inline-block;
+    font-size: 3vw;
+    margin-left: 0.4em;
+    text-transform: uppercase;
   }
 }
 

@@ -17,8 +17,7 @@ export default (function () {
   places = places.map(
     (placeArr) => (
       (placeArr.filter(({ name }) =>
-        name.toLowerCase() === 'all airports')[0])
-      || placeArr[0]))
+        name.toLowerCase() === 'all airports')[0]) || placeArr[0]))
 
   const presentAirport = ({ name, city, country, iata, latitude, longitude }) => ({
     label: name.toLowerCase() !== 'all airports'

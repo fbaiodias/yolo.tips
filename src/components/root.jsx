@@ -24,9 +24,8 @@ export default class Root extends Component {
       <div>
         <div className='header'>
           <img src={yoloImage}/>
-          <span>
-            .tips
-          </span>
+          <span>.tips</span>
+          <small>beta</small>
         </div>
         <div className='container'>
           <FormSearch onSubmit={this.handleSubmit}/>
