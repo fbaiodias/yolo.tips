@@ -90,8 +90,15 @@ export default class FormSearch extends Component {
 
     const details = this.state.showDetails ? (
       <div>
-        <Input ref='weeks' min='1' max='10' label='in the next' type='number' defaultValue={weeks} addonAfter='weeks' />
-        <Input ref='max' min='1' label='for a maximum of' type='number' defaultValue={max} buttonAfter={innerDropdown} />
+        <Input ref='weeks' min='1' max='8' label='in the next' type='number' defaultValue={weeks} addonAfter='weeks' />
+        <Input type='select' ref='max' label='for a maximum of' defaultValue={max} buttonAfter={innerDropdown}>
+          <option value='50'>50</option>
+          <option value='100'>100</option>
+          <option value='150'>150</option>
+          <option value='200'>200</option>
+          <option value='300'>300</option>
+          <option value='500'>500</option>
+        </Input>
         <a onClick={this.toggleDetails}><Icon name='minus-square-o' /> hide details</a>
       </div>
     ) : (
