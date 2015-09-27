@@ -123,7 +123,7 @@ export default class FormSearch extends Component {
             <b>I want to fly from:</b>
           </Col>
           <Col xs={8} md={10}>
-            <Select ref='origin' options={options} value={this.state.origin} filterOptions={filterOptions} onChange={this.handleOriginChange} label='I want to go from' searchable />
+            <Select ref='origin' options={options} value={this.state.origin} filterOptions={filterOptions} onChange={this.handleOriginChange} placeholder='Type to search for an airport...' searchable />
           </Col>
           <Col xs={4} md={2}>
             <Button type='submit' bsStyle='primary' title='Click to search' block>YOLO!</Button>
