@@ -58,12 +58,14 @@ a {
   padding: 8px 12px;
   background-color: black;
   color: white;
+  border: none;
 
   &:active,
   &:active:focus,
   &:focus,
   &:hover {
     background-color: #333;
+    border: none;
   }
 }
 
@@ -91,6 +93,33 @@ a {
 
     .silliness {
       font-size: 2em;
+    }
+  }
+
+  .panel {
+    border: 1px solid #efefef;
+    border-radius: 2px;
+    -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+
+    .fa-share {
+      display: none;
+      position: absolute;
+      right: 1.4em;
+      top: 1.4em;
+    }
+
+    &:hover {
+      -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+      box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+
+      .fa-share {
+        display: block;
+      }
+
+      a {
+        color: #111;
+      }
     }
   }
 }
