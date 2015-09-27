@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Icon from 'react-fa'
 import Results from './results'
 import FormSearch from './form-search'
 import yoloImage from '../../static/yolo.gif'
@@ -29,6 +30,15 @@ export default class Root extends Component {
               .tips
             </span>
             <small>beta</small>
+
+            <div className='side'>
+              <a href='https://github.com/xicombd/yolo.tips' target='_blank'>
+                <Icon name='github' />
+              </a>
+              <a href='https://twitter.com/getyolotips' target='_blank'>
+                <Icon name='twitter' />
+              </a>
+            </div>
           </div>
         </div>
         <div className='container'>

@@ -53,6 +53,21 @@ a {
       padding-top: 1200px * 0.08;
     }
   }
+
+  .side {
+    position: absolute;
+    right: 1em;
+    top: 1em;
+
+    a {
+      display: block;
+
+      .fa {
+        font-size: 5vw;
+        color: white;
+      }
+    }
+  }
 }
 
 .input-group-addon {
