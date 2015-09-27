@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Results from './results'
 import FormSearch from './form-search'
+import yoloImage from '../../static/yolo.gif'
 
 export default class Root extends Component {
   constructor (props) {
@@ -20,10 +21,17 @@ export default class Root extends Component {
       ? (<Results options={this.state.options}/>) : void 0
 
     return (
-      <div className='container'>
-        <h1>yolo.tips</h1>
-        <FormSearch onSubmit={this.handleSubmit}/>
-        {content}
+      <div>
+        <div className='header'>
+          <img src={yoloImage}/>
+          <span>
+            .tips
+          </span>
+        </div>
+        <div className='container'>
+          <FormSearch onSubmit={this.handleSubmit}/>
+          {content}
+        </div>
       </div>
     )
   }

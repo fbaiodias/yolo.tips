@@ -1,3 +1,33 @@
 $icon-font-path: "/fonts/bootstrap/";
 
 @import "~bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+
+.header {
+  background: black;
+  color: white;
+  margin-bottom: 1em;
+
+  img {
+    max-width: 50%;
+  }
+
+  span {
+    font-size: 10vw;
+    font-weight: bold;
+    vertical-align: middle;
+    margin-left: -0.3em;
+  }
+}
+
+.loading {
+  text-align: center;
+
+  .fa {
+    font-size: 13em;
+    padding: 0.3em
+  }
+
+  .silliness {
+    font-size: 2em;
+  }
+}

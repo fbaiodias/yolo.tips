@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { ListGroup, ListGroupItem, Row, Col } from 'react-bootstrap'
 import moment from 'moment'
+import Icon from 'react-fa'
 import search from '../services/search'
 
 export default class Results extends Component {
@@ -34,7 +35,12 @@ export default class Results extends Component {
     let results
 
     if (!this.state.results) {
-      results = (<h3>loading...</h3>)
+      results = (
+        <div className='loading'>
+          <Icon name='circle-o-notch' spin />
+          <p className='silliness'></p>
+        </div>
+      )
     } else if (this.state.results.length === 0) {
       results = (<h3>nothing found, sorry :(</h3>)
     } else {

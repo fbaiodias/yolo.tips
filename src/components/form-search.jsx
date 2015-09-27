@@ -83,7 +83,7 @@ export default class FormSearch extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <Select ref='origin' options={options} value={this.state.origin} filterOptions={filterOptions} onChange={this.handleOriginChange} label='I want to go from' searchable />
-        <Input ref='weeks' min='1' max='10' label='in the next' type='number' defaultValue='2' addonAfter='weeks' />
+        <Input ref='weeks' min='1' max='10' label='in the next' type='number' defaultValue='1' addonAfter='weeks' />
         <Input ref='max' min='1' label='for a maximum of' type='number' defaultValue='100' buttonAfter={innerDropdown} />
         <Button type='submit' bsStyle='primary' bsSize='large' block>Search</Button>
       </form>
