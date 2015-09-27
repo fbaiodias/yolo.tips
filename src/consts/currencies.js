@@ -1,7 +1,7 @@
 export default [
-  { value: 'EUR', label: 'EUR - €' },
-  { value: 'GBP', label: 'GBP - £' },
-  { value: 'USD', label: 'USD - $' }
+  { value: 'EUR', label: 'EUR - €', shortLabel: '€' },
+  { value: 'GBP', label: 'GBP - £', shortLabel: '£' },
+  { value: 'USD', label: 'USD - $', shortLabel: '$' }
   // { value: 'PLN', label: 'PLN - zł' },
   // { value: 'AED', label: 'AED - د.إ.‏' },
   // { value: 'AFN', label: 'AFN - AFN' },

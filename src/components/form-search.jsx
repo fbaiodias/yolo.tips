@@ -1,7 +1,8 @@
 import values from 'lodash.mapvalues'
 import React, { Component, PropTypes } from 'react'
-import { Input, Button, DropdownButton, MenuItem } from 'react-bootstrap'
+import { Input, Button, DropdownButton, MenuItem, Row, Col } from 'react-bootstrap'
 import Select from 'react-select'
+import Icon from 'react-fa'
 import currencies from '../consts/currencies'
 import nearestAirport from '../services/nearest-airport'
 import places from '../consts/airports.js'
@@ -24,9 +25,13 @@ export default class FormSearch extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleCurrencyChange = this.handleCurrencyChange.bind(this)
     this.handleOriginChange = this.handleOriginChange.bind(this)
+    this.toggleDetails = this.toggleDetails.bind(this)
 
     this.state = {
-      currency: currencies[0]
+      weeks: 1,
+      max: 100,
+      currency: 'EUR',
+      showDetails: false
     }
   }
 
@@ -37,12 +42,18 @@ export default class FormSearch extends Component {
     })
   }
 
+  getValue () {
+    const value = values(this.refs, (value) => (value.getValue && value.getValue() || this.state[value]))
+    value.currency = this.state.currency
+    value.origin = this.state.origin
+    return value
+  }
+
   handleSubmit (e) {
     e && e.preventDefault()
-    const options = values(this.refs, (value) => (value.getValue && value.getValue()))
-    options.currency = this.state.currency.value
-    options.origin = this.state.origin
-    this.props.onSubmit(options)
+    const value = this.getValue()
+    this.setState({ ...value })
+    this.props.onSubmit(value)
   }
 
   handleCurrencyChange (currency) {
@@ -53,9 +64,19 @@ export default class FormSearch extends Component {
     this.setState({ origin })
   }
 
+  toggleDetails () {
+    const { showDetails } = this.state
+    const value = this.getValue()
+    this.setState({ showDetails: !showDetails, ...value })
+  }
+
   render () {
+    const { weeks, max, currency } = this.state
+
+    const selectedCurrency = currencies.filter((cur) => cur.value === currency)[0]
+
     const innerDropdown = (
-      <DropdownButton title={this.state.currency.label}>
+      <DropdownButton title={selectedCurrency.label} id='currency'>
         {
           currencies.map((currency) => (
             <MenuItem key={currency.value}
@@ -65,6 +86,16 @@ export default class FormSearch extends Component {
           ))
         }
       </DropdownButton>
+    )
+
+    const details = this.state.showDetails ? (
+      <div>
+        <Input ref='weeks' min='1' max='10' label='in the next' type='number' defaultValue={weeks} addonAfter='weeks' />
+        <Input ref='max' min='1' label='for a maximum of' type='number' defaultValue={max} buttonAfter={innerDropdown} />
+        <a onClick={this.toggleDetails}><Icon name='minus-square-o' /> hide details</a>
+      </div>
+    ) : (
+      <a onClick={this.toggleDetails}><Icon name='pencil-square-o' /> ...in the next {weeks} week{ weeks === 1 ? '' : 's'}, for a maximum of {max}{selectedCurrency.shortLabel}</a>
     )
 
     const filterOptions = (opts, filterValue, exclude) => {
@@ -82,10 +113,19 @@ export default class FormSearch extends Component {
 
     return (
       <form onSubmit={this.handleSubmit}>
-        <Select ref='origin' options={options} value={this.state.origin} filterOptions={filterOptions} onChange={this.handleOriginChange} label='I want to go from' searchable />
-        <Input ref='weeks' min='1' max='10' label='in the next' type='number' defaultValue='1' addonAfter='weeks' />
-        <Input ref='max' min='1' label='for a maximum of' type='number' defaultValue='100' buttonAfter={innerDropdown} />
-        <Button type='submit' bsStyle='primary' bsSize='large' block>Search</Button>
+        <Row className='main-inputs'>
+          <Col xs={8} md={10}>
+            <Select ref='origin' options={options} value={this.state.origin} filterOptions={filterOptions} onChange={this.handleOriginChange} label='I want to go from' searchable />
+          </Col>
+          <Col xs={4} md={2}>
+            <Button type='submit' bsStyle='primary' block>YOLO!</Button>
+          </Col>
+        </Row>
+        <Row className='details-inputs'>
+          <Col xs={12} md={12}>
+            {details}
+          </Col>
+        </Row>
       </form>
     )
   }

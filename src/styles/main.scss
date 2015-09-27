@@ -2,6 +2,11 @@ $icon-font-path: "/fonts/bootstrap/";
 
 @import "~bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 
+a {
+  cursor: pointer;
+  text-decoration: none !important;
+}
+
 .header {
   background: black;
   color: white;
@@ -30,6 +35,23 @@ $icon-font-path: "/fonts/bootstrap/";
   }
 }
 
+.input-group-addon {
+  background-color: white;
+}
+
+.btn-primary {
+  padding: 8px 12px;
+  background-color: black;
+  color: white;
+
+  &:active,
+  &:active:focus,
+  &:focus,
+  &:hover {
+    background-color: #333;
+  }
+}
+
 .loading {
   text-align: center;
 
@@ -41,4 +63,8 @@ $icon-font-path: "/fonts/bootstrap/";
   .silliness {
     font-size: 2em;
   }
+}
+
+.main-inputs {
+  margin-bottom: 10px;
 }
