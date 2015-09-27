@@ -2,6 +2,10 @@ $icon-font-path: "/fonts/bootstrap/";
 
 @import "~bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 
+body {
+  overflow-y: scroll;  /* avoids reflows because of scrollbar showing up */
+}
+
 a {
   cursor: pointer;
   text-decoration: none !important;
