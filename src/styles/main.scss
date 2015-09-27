@@ -65,10 +65,11 @@ a {
       .fa {
         font-size: 5vw;
         color: white;
-        @media screen and (min-width: 1200px) {
-          & {
-            1200px * 0.05;
-          }
+      }
+
+      @media screen and (min-width: 1200px) {
+        .fa {
+          1200px * 0.05;
         }
       }
     }
