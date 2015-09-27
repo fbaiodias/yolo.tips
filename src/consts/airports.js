@@ -1,7 +1,7 @@
 import uniq from 'lodash.uniq'
 import groupBy from 'lodash.groupby'
 
-const airportCodes = require('airport-codes/airports.json')
+const airportCodes = require('./airports.json')
 
 // When there's an "all airports" entry available, deduplicate all entries in the same city to the same airport.
 export default (function () {
@@ -9,13 +9,16 @@ export default (function () {
 
   places = airportCodes.filter(({ iata }) => !!iata)
 
-  places = groupBy(places, 'city')
+  places = groupBy(places, ({ city, country }) =>
+    `${city}::::${country}`.toLowerCase())
 
   places = Object.keys(places).map((k) => places[k])
 
   places = places.map(
-    (placeArr) =>
-      (placeArr.filter(({ name }) => name.toLowerCase() === 'all airports')[0] || placeArr[0]))
+    (placeArr) => (
+      (placeArr.filter(({ name }) =>
+        name.toLowerCase() === 'all airports')[0])
+      || placeArr[0]))
 
   const presentAirport = ({ name, city, country, iata, latitude, longitude }) => ({
     label: name.toLowerCase() !== 'all airports'
@@ -27,5 +30,7 @@ export default (function () {
     longitude
   })
 
-  return uniq(airportCodes.map(presentAirport), 'value')
+  places = places.map(presentAirport)
+
+  return uniq(places, 'value')
 }())

@@ -4,7 +4,7 @@ import { Input, Button, DropdownButton, MenuItem } from 'react-bootstrap'
 import Select from 'react-select'
 import currencies from '../consts/currencies'
 import nearestAirport from '../services/nearest-airport'
-import places from '../consts/airports'
+import places from '../consts/airports.js'
 
 import 'react-select/dist/default.css'
 
