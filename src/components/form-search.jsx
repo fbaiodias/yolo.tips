@@ -33,7 +33,7 @@ export default class FormSearch extends Component {
   componentWillMount () {
     nearestAirport().then((airport) => {
       this.setState({ origin: airport.iata })
-      console.log('nearest airport is', airport)
+      this.handleSubmit()
     })
   }
 
