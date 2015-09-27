@@ -8,7 +8,8 @@ $icon-font-path: "/fonts/bootstrap/";
   margin-bottom: 1em;
 
   img {
-    max-width: 50%;
+    width: 50%;
+    margin-left: -8.5%;  /* The place in the pic where the Y comes up, adjusted to its own height */
     padding: 0.2em;
   }
 
@@ -27,6 +28,12 @@ $icon-font-path: "/fonts/bootstrap/";
     font-size: 3vw;
     margin-left: 0.4em;
     text-transform: uppercase;
+  }
+
+  @media screen and (min-width: 1200px) {
+    span {
+      font-size: 120px;
+    }
   }
 }
 
