@@ -13,7 +13,8 @@ a {
   margin-bottom: 1em;
 
   img {
-    max-width: 50%;
+    width: 50%;
+    margin-left: -8.5%;  /* The place in the pic where the Y comes up, adjusted to its own height */
     padding: 0.2em;
   }
 
@@ -32,6 +33,20 @@ a {
     font-size: 3vw;
     margin-left: 0.4em;
     text-transform: uppercase;
+  }
+
+  /* Because BS containers have a max-width
+   * we need to stop these fonts from growing
+   * relative to screen width
+   */
+  @media screen and (min-width: 1200px) {
+    span {
+      font-size: 1200px * 0.1;
+    }
+    small {
+      font-size: 1200px * 0.03;
+      padding-top: 1200px * 0.08;
+    }
   }
 }
 
