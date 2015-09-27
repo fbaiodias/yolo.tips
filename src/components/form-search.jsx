@@ -114,6 +114,9 @@ export default class FormSearch extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <Row className='main-inputs'>
+          <Col xs={12} md={12}>
+            <b>I want to fly from:</b>
+          </Col>
           <Col xs={8} md={10}>
             <Select ref='origin' options={options} value={this.state.origin} filterOptions={filterOptions} onChange={this.handleOriginChange} label='I want to go from' searchable />
           </Col>

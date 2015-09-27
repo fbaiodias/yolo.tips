@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { ListGroup, ListGroupItem, Row, Col } from 'react-bootstrap'
+import { Panel, Row, Col } from 'react-bootstrap'
 import moment from 'moment'
 import Icon from 'react-fa'
 import search from '../services/search'
@@ -45,20 +45,20 @@ export default class Results extends Component {
       results = (<h3>nothing found, sorry :(</h3>)
     } else {
       results = this.state.results.map((result) => (
-        <ListGroupItem>
+        <Panel>
           <a href={result.url} target='_blank'>
             <Row>
               <Col xs={10} md={10}>
                 <b>{result.outbound.to.city}, {result.outbound.to.country} {moment(result.outbound.departureDate).fromNow()}</b>
                 <p>
-                  {moment(result.outbound.departureDate).format('dddd, MMMM')}
+                  {moment(result.outbound.departureDate).format('dddd, MMMM Do')}
                   <br />
-                  {result.outbound.from.airport}, {result.outbound.from.country} to {result.outbound.to.airport}, {result.outbound.to.country}
+                  <small>{`${result.outbound.from.airport}, ${result.outbound.from.country} to ${result.outbound.to.airport}, ${result.outbound.to.country}`}</small>
                 </p>
                 <p>
-                  {moment(result.inbound.departureDate).format('dddd, MMMM')}
+                  {moment(result.inbound.departureDate).format('dddd, MMMM Do')}
                   <br />
-                  {result.inbound.from.airport}, {result.inbound.from.country} to {result.inbound.to.airport}, {result.inbound.to.country}
+                  <small>{`${result.inbound.from.airport}, ${result.inbound.from.country} to ${result.inbound.to.airport}, ${result.inbound.to.country}`}</small>
                 </p>
               </Col>
               <Col xs={2} md={2}>
@@ -66,14 +66,14 @@ export default class Results extends Component {
               </Col>
             </Row>
           </a>
-        </ListGroupItem>
+        </Panel>
      ))
     }
 
     return (
-      <ListGroup>
+      <div>
         {results}
-      </ListGroup>
+      </div>
     )
   }
 }
