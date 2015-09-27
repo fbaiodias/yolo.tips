@@ -13,8 +13,6 @@ const MAX_OPTIONS = 20
 
 const options = places.map(({ label, value }) => ({ label, value }))
 
-console.log('options', options)
-
 export default class FormSearch extends Component {
   static propTypes = {
     onSubmit: PropTypes.func

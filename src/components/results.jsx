@@ -2,7 +2,11 @@ import React, { Component, PropTypes } from 'react'
 import { Panel, Row, Col } from 'react-bootstrap'
 import moment from 'moment'
 import Icon from 'react-fa'
+import indexBy from 'lodash.indexby'
 import search from '../services/search'
+import currencies from '../consts/currencies'
+
+const mappedCurrencies = indexBy(currencies, 'value')
 
 export default class Results extends Component {
   static propPypes = {
@@ -45,35 +49,32 @@ export default class Results extends Component {
       results = (<h3>nothing found, sorry :(</h3>)
     } else {
       results = this.state.results.map((result) => (
-        <Panel>
-          <a href={result.url} target='_blank'>
-            <Row>
-              <Col xs={10} md={10}>
-                <b>{result.outbound.to.city}, {result.outbound.to.country} {moment(result.outbound.departureDate).fromNow()}</b>
-                <p>
-                  {moment(result.outbound.departureDate).format('dddd, MMMM Do')}
-                  <br />
-                  <small>{`${result.outbound.from.airport}, ${result.outbound.from.country} to ${result.outbound.to.airport}, ${result.outbound.to.country}`}</small>
-                </p>
-                <p>
-                  {moment(result.inbound.departureDate).format('dddd, MMMM Do')}
-                  <br />
-                  <small>{`${result.inbound.from.airport}, ${result.inbound.from.country} to ${result.inbound.to.airport}, ${result.inbound.to.country}`}</small>
-                </p>
-              </Col>
-              <Col xs={2} md={2}>
-                {Math.round(result.price)} {result.currencyId}
-              </Col>
-            </Row>
-          </a>
-        </Panel>
-     ))
+        <Col xs={12} md={6}>
+          <Panel>
+            <a href={result.url} target='_blank' title='Click to view on skyscanner'>
+              <h4>{`${result.outbound.to.city}, ${result.outbound.to.country} ${moment(result.outbound.departureDate).fromNow()} for ${Math.round(result.price)}${mappedCurrencies[result.currencyId].shortLabel}`}</h4>
+              <p>
+                <Icon name='long-arrow-right' />
+                {moment(result.outbound.departureDate).format('dddd, MMMM Do')}
+                <br />
+                <small>{`${result.outbound.from.airport}, ${result.outbound.from.country} to ${result.outbound.to.airport}, ${result.outbound.to.country}`}</small>
+              </p>
+              <p>
+                <Icon name='long-arrow-left' />
+                {moment(result.inbound.departureDate).format('dddd, MMMM Do')}
+                <br />
+                <small>{`${result.inbound.from.airport}, ${result.inbound.from.country} to ${result.inbound.to.airport}, ${result.inbound.to.country}`}</small>
+              </p>
+            </a>
+          </Panel>
+        </Col>
+      ))
     }
 
     return (
-      <div>
+      <Row className='results'>
         {results}
-      </div>
+      </Row>
     )
   }
 }

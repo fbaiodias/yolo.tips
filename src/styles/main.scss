@@ -67,19 +67,34 @@ a {
   }
 }
 
-.loading {
-  text-align: center;
-
-  .fa {
-    font-size: 13em;
-    padding: 0.3em
-  }
-
-  .silliness {
-    font-size: 2em;
-  }
-}
-
 .main-inputs {
   margin-bottom: 10px;
+}
+
+.details-inputs {
+  margin-bottom: 30px;
+}
+
+.results {
+  a {
+    color: #333;
+  }
+
+  .fa {
+    margin: 0 7px;
+    font-size: larger;
+  }
+
+  .loading {
+    text-align: center;
+
+    .fa {
+      font-size: 13em;
+      padding: 0.3em
+    }
+
+    .silliness {
+      font-size: 2em;
+    }
+  }
 }
