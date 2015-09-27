@@ -71,7 +71,7 @@ export default class FormSearch extends Component {
   render () {
     const { weeks, max, currency } = this.state
 
-    const selectedCurrency = currencies.filter((cur) => cur.value === currency.value)[0]
+    const selectedCurrency = currencies.filter((cur) => cur.value === currency)[0]
 
     const innerDropdown = (
       <DropdownButton title={selectedCurrency.label} id='currency'>
