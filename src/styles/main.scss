@@ -2,6 +2,10 @@ $icon-font-path: "/fonts/bootstrap/";
 
 @import "~bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 
+body {
+  overflow-y: scroll;  /* avoids reflows because of scrollbar showing up */
+}
+
 a {
   cursor: pointer;
   text-decoration: none !important;
@@ -16,6 +20,7 @@ a {
     width: 50%;
     margin-left: -8.5%;  /* The place in the pic where the Y comes up, adjusted to its own height */
     padding: 0.2em;
+    height: auto;
   }
 
   span {

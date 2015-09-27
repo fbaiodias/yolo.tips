@@ -24,7 +24,7 @@ export default class Root extends Component {
       <div>
         <div className='header'>
           <div className='container'>
-            <img src={yoloImage}/>
+            <img src={yoloImage} width='500' height='199' />
             <span>
               .tips
             </span>
