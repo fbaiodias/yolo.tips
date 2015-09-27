@@ -1,5 +1,5 @@
 var sphereKnn = require('sphere-knn')
-var airports = require('airport-codes/airports.json')
+var airports = require('../consts/airports.json')
 
 var nearestAirport = sphereKnn(airports)  // (lat, lon, maxResults, maxDistance)
 
