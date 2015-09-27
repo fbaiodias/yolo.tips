@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Panel, Row, Col } from 'react-bootstrap'
+import { Panel, Row, Col, Alert } from 'react-bootstrap'
 import moment from 'moment'
 import Icon from 'react-fa'
 import indexBy from 'lodash.indexby'
@@ -20,35 +20,68 @@ export default class Results extends Component {
 
     this.search = this.search.bind(this)
 
-    this.state = {}
-
-    this.search(props.options)
+    this.state = {
+      results: [],
+      isLoading: false,
+      isFinished: false
+    }
   }
 
   componentWillReceiveProps (nextProps) {
     this.search(nextProps.options)
   }
 
+  componentDidMount () {
+    this.search(this.props.options)
+  }
+
   search (options) {
+    this.setState({ isLoading: true, isFinished: false, error: undefined })
     search(options)
-      .then((results) => this.setState({ results }))
-      .catch((error) => this.setState({ error }))
+      .then((results) => this.setState({ isLoading: false, isFinished: true, results }))
+      .catch((error) => this.setState({ isLoading: false, isFinished: true, error }))
   }
 
   render () {
-    let results
+    const { isLoading, isFinished, error, results } = this.state
 
-    if (!this.state.results) {
-      results = (
-        <div className='loading'>
-          <Icon name='circle-o-notch' spin />
-          <p className='silliness'></p>
+    if (isLoading) {
+      return (
+        <div className='results'>
+          <div className='loading'>
+            <Icon name='circle-o-notch' spin />
+            <p className='silliness'></p>
+          </div>
         </div>
       )
-    } else if (this.state.results.length === 0) {
-      results = (<h3>nothing found, sorry :(</h3>)
-    } else {
-      results = this.state.results.map((result) => (
+    }
+
+    if (error) {
+      console.error(error)
+      return (
+        <div className='results'>
+          <Alert bsStyle='danger'>
+            <h4>Oh snap! You got an error!</h4>
+            <p>Sorry, there was an error getting your #YOLO tips :(</p>
+            <p>Please try again later.</p>
+          </Alert>
+        </div>
+      )
+    }
+
+    if (isFinished && results.length === 0) {
+      return (
+        <div className='results'>
+          <Alert bsStyle='warning'>
+            <h4>Nothing found, sorry :(</h4>
+            <p>You can always, try again later.</p>
+          </Alert>
+        </div>
+      )
+    }
+
+    if (results.length > 0) {
+      const content = results.map((result) => (
         <Col xs={12} md={6}>
           <a href={result.url} target='_blank' title='Click to view on skyscanner'>
             <Panel>
@@ -71,17 +104,16 @@ export default class Results extends Component {
         </Col>
       ))
 
-      results.unshift((
-        <Col xs={12} md={12}>
-          <h3>Here are our best tips for you:</h3>
-        </Col>
-      ))
+      return (
+        <Row className='results'>
+          <Col xs={12} md={12}>
+            <h3>Here are our best tips for you:</h3>
+          </Col>
+          {content}
+        </Row>
+      )
     }
 
-    return (
-      <Row className='results'>
-        {results}
-      </Row>
-    )
+    return (<div className='results' />)
   }
 }
