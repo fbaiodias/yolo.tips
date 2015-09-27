@@ -78,7 +78,7 @@ export default class FormSearch extends Component {
         {
           currencies.map((currency) => (
             <MenuItem key={currency.value}
-              onSelect={() => this.handleCurrencyChange(currency)}>
+              onSelect={() => this.handleCurrencyChange(currency.value)}>
               {currency.label}
             </MenuItem>
           ))
