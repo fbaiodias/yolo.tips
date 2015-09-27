@@ -26,8 +26,8 @@ export default class FormSearch extends Component {
     this.toggleDetails = this.toggleDetails.bind(this)
 
     this.state = {
-      weeks: 1,
-      max: 100,
+      weeks: '1',
+      max: '100',
       currency: 'EUR',
       showDetails: false
     }
@@ -88,7 +88,7 @@ export default class FormSearch extends Component {
 
     const details = this.state.showDetails ? (
       <div>
-        <Input ref='weeks' min='1' max='8' label='in the next' type='number' defaultValue={weeks} addonAfter='weeks' />
+        <Input ref='weeks' min='1' max='8' label='in the next' type='number' defaultValue={weeks} addonAfter='weekends' />
         <Input type='select' ref='max' label='for a maximum of' defaultValue={max} buttonAfter={innerDropdown}>
           <option value='50'>50</option>
           <option value='100'>100</option>
@@ -100,7 +100,7 @@ export default class FormSearch extends Component {
         <a onClick={this.toggleDetails}><Icon name='minus-square-o' /> hide details</a>
       </div>
     ) : (
-      <a onClick={this.toggleDetails}><Icon name='pencil-square-o' /> ...in the next {weeks} week{ weeks === 1 ? '' : 's'}, for a maximum of {max}{selectedCurrency.shortLabel}</a>
+      <a onClick={this.toggleDetails}><Icon name='pencil-square-o' /> ...in the next {weeks === '1' ? 'weekend' : `${weeks} weekends`}, for a maximum of {max}{selectedCurrency.shortLabel}</a>
     )
 
     const filterOptions = (opts, filterValue, exclude) => {
@@ -126,7 +126,7 @@ export default class FormSearch extends Component {
             <Select ref='origin' options={options} value={this.state.origin} filterOptions={filterOptions} onChange={this.handleOriginChange} label='I want to go from' searchable />
           </Col>
           <Col xs={4} md={2}>
-            <Button type='submit' bsStyle='primary' block>YOLO!</Button>
+            <Button type='submit' bsStyle='primary' title='Click to search' block>YOLO!</Button>
           </Col>
         </Row>
         <Row className='details-inputs'>

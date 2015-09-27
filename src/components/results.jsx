@@ -69,6 +69,12 @@ export default class Results extends Component {
           </Panel>
         </Col>
       ))
+
+      results.unshift((
+        <Col xs={12} md={12}>
+          <h3>Here are our best tips for you:</h3>
+        </Col>
+      ))
     }
 
     return (
