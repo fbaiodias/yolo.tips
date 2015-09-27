@@ -39,6 +39,7 @@
     "lodash.mapvalues": "3.0.1",
     "lodash.startswith": "^3.0.1",
     "lodash.uniq": "^3.2.2",
+    "memoizee": "^0.3.9",
     "moment": "^2.10.6",
     "node-sass": "^3.3.2",
     "qs": "^5.1.0",

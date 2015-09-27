@@ -51,12 +51,12 @@ export default class Results extends Component {
               <Col xs={10} md={10}>
                 <b>{result.outbound.to.city}, {result.outbound.to.country} {moment(result.outbound.departureDate).fromNow()}</b>
                 <p>
-                  {moment(result.outbound.departureDate).format('dddd, MMMM Do YYYY')}
+                  {moment(result.outbound.departureDate).format('dddd, MMMM')}
                   <br />
                   {result.outbound.from.airport}, {result.outbound.from.country} to {result.outbound.to.airport}, {result.outbound.to.country}
                 </p>
                 <p>
-                  {moment(result.inbound.departureDate).format('dddd, MMMM Do YYYY')}
+                  {moment(result.inbound.departureDate).format('dddd, MMMM')}
                   <br />
                   {result.inbound.from.airport}, {result.inbound.from.country} to {result.inbound.to.airport}, {result.inbound.to.country}
                 </p>
