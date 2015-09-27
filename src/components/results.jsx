@@ -53,7 +53,7 @@ export default class Results extends Component {
           <a href={result.url} target='_blank' title='Click to view on skyscanner'>
             <Panel>
               <Icon name='share' />
-              <h4>{`${result.outbound.to.city}, ${result.outbound.to.country} ${moment(result.outbound.departureDate).fromNow()} for ${Math.round(result.price)}${mappedCurrencies[result.currencyId].shortLabel}`}</h4>
+              <h4>{`${result.outbound.to.city}, ${result.outbound.to.country} ${moment(result.outbound.departureDate).fromNow()} for ~${Math.round(result.price)}${mappedCurrencies[result.currencyId].shortLabel}`}</h4>
               <p>
                 <Icon name='long-arrow-right' />
                 {moment(result.outbound.departureDate).format('dddd, MMMM Do')}
