@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react'
-import { Panel, Row, Col, Alert } from 'react-bootstrap'
-import moment from 'moment'
+import { Row, Col, Alert } from 'react-bootstrap'
 import Icon from 'react-fa'
-import indexBy from 'lodash.indexby'
+import Item from './result-item'
+import get from 'lodash.get'
+import group from 'lodash.groupby'
+import unique from 'lodash.uniq'
 import search from '../services/search'
 import currencies from '../consts/currencies'
-
-const mappedCurrencies = indexBy(currencies, 'value')
 
 export default class Results extends Component {
   static propPypes = {
@@ -81,27 +81,10 @@ export default class Results extends Component {
     }
 
     if (results.length > 0) {
-      const content = results.map((result) => (
-        <Col xs={12} md={6}>
-          <a href={result.url} target='_blank' title='Click to view on skyscanner'>
-            <Panel>
-              <Icon name='share' />
-              <h4>{`${result.outbound.to.city}, ${result.outbound.to.country} ${moment(result.outbound.departureDate).fromNow()} for ~${Math.round(result.price)}${mappedCurrencies[result.currencyId].shortLabel}`}</h4>
-              <p>
-                <Icon name='long-arrow-right' />
-                {moment(result.outbound.departureDate).format('dddd, MMMM Do')}
-                <br />
-                <small>{`${result.outbound.from.airport}, ${result.outbound.from.country} to ${result.outbound.to.airport}, ${result.outbound.to.country}`}</small>
-              </p>
-              <p>
-                <Icon name='long-arrow-left' />
-                {moment(result.inbound.departureDate).format('dddd, MMMM Do')}
-                <br />
-                <small>{`${result.inbound.from.airport}, ${result.inbound.from.country} to ${result.inbound.to.airport}, ${result.inbound.to.country}`}</small>
-              </p>
-            </Panel>
-          </a>
-        </Col>
+      const grouped = group(results, (result) => get(result, 'outbound.to.airportCode'))
+      const order = unique(results.map((result) => get(result, 'outbound.to.airportCode')))
+      const content = order.map((key) => (
+        <Item results={ grouped[key] }/>
       ))
 
       return (
