@@ -122,19 +122,7 @@ a {
     }
   }
 
-  .panel {
-    border: 1px solid #efefef;
-    border-radius: 2px;
-    -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-
-    .fa-share {
-      display: none;
-      position: absolute;
-      right: 1.4em;
-      top: 1.4em;
-    }
-
+  .list-group-item {
     &:hover {
       -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
       box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
@@ -146,6 +134,19 @@ a {
       a {
         color: #111;
       }
+    }
+  }
+  .panel {
+    border: 1px solid #efefef;
+    border-radius: 2px;
+    -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+
+    .fa-share {
+      display: none;
+      position: absolute;
+      right: 1.4em;
+      top: 1.4em;
     }
   }
 }

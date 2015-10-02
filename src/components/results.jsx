@@ -6,7 +6,6 @@ import get from 'lodash.get'
 import group from 'lodash.groupby'
 import unique from 'lodash.uniq'
 import search from '../services/search'
-import currencies from '../consts/currencies'
 
 export default class Results extends Component {
   static propPypes = {
