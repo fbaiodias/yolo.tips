@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Panel, Col } from 'react-bootstrap'
+import { Panel, Col, ListGroup, ListGroupItem } from 'react-bootstrap'
 import moment from 'moment'
 import Icon from 'react-fa'
 import indexBy from 'lodash.indexby'
@@ -41,43 +41,45 @@ export default class ResultItem extends Component {
     const results = this.state.isExpanded
       ? this.props.results : this.props.results.slice(0, 1)
     const content = results.map((result) => (
-      <Col xs={12} md={12}>
+      <ListGroupItem>
         <a href={result.url} target='_blank' title='Click to view on skyscanner'>
-          <Panel>
-            <Icon name='share' />
-            <h4>{`${result.outbound.to.city}, ${result.outbound.to.country} ${moment(result.outbound.departureDate).fromNow()} for ~${Math.round(result.price)}${mappedCurrencies[result.currencyId].shortLabel}`}</h4>
-            <p>
-              <Icon name='long-arrow-right' />
-              {moment(result.outbound.departureDate).format('dddd, MMMM Do')}
-              <br />
-              <small>{`${result.outbound.from.airport}, ${result.outbound.from.country} to ${result.outbound.to.airport}, ${result.outbound.to.country}`}</small>
-            </p>
-            <p>
-              <Icon name='long-arrow-left' />
-              {moment(result.inbound.departureDate).format('dddd, MMMM Do')}
-              <br />
-              <small>{`${result.inbound.from.airport}, ${result.inbound.from.country} to ${result.inbound.to.airport}, ${result.inbound.to.country}`}</small>
-            </p>
-          </Panel>
+          <Icon name='share' />
+          <h4>{`${moment(result.outbound.departureDate).fromNow()} for ~${Math.round(result.price)}${mappedCurrencies[result.currencyId].shortLabel}`}</h4>
+          <p>
+            <Icon name='long-arrow-right' />
+            {moment(result.outbound.departureDate).format('dddd, MMMM Do')}
+            <br />
+            <small>{`${result.outbound.from.airport}, ${result.outbound.from.country} to ${result.outbound.to.airport}, ${result.outbound.to.country}`}</small>
+          </p>
+          <p>
+            <Icon name='long-arrow-left' />
+            {moment(result.inbound.departureDate).format('dddd, MMMM Do')}
+            <br />
+            <small>{`${result.inbound.from.airport}, ${result.inbound.from.country} to ${result.inbound.to.airport}, ${result.inbound.to.country}`}</small>
+          </p>
         </a>
-      </Col>
+      </ListGroupItem>
     ))
 
     let extra
     if (this.props.results.length > 1) {
       const text = this.state.isExpanded ? 'less' : 'more'
       extra = (
-        <Col xs={12} md={12}>
+        <ListGroupItem>
           <a onClick={this.toggle}>show {text}</a>
-        </Col>
+        </ListGroupItem>
       )
     }
-
+    const title = `Go to ${results[0].outbound.to.city}, ${results[0].outbound.to.country}`
     return (
-      <div>
-        {content}
-        {extra}
-      </div>
+      <Col xs={12} md={12}>
+        <Panel bsStyle='primary' header={title}>
+          <ListGroup fill>
+            {content}
+            {extra}
+          </ListGroup>
+        </Panel>
+      </Col>
     )
   }
 }
