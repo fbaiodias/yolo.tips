@@ -36,9 +36,12 @@ export default class Results extends Component {
 
   search (options) {
     this.setState({ isLoading: true, isFinished: false, error: undefined })
-    search(options)
-      .then((results) => this.setState({ isLoading: false, isFinished: true, results }))
-      .catch((error) => this.setState({ isLoading: false, isFinished: true, error }))
+    search(options, (err, results) => {
+      if (err) {
+        return this.setState({ isLoading: false, isFinished: true, err })
+      }
+      this.setState({ isLoading: false, isFinished: true, results })
+    })
   }
 
   render () {

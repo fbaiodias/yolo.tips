@@ -1,9 +1,19 @@
-import axios from 'axios'
-import qs from 'qs'
+import memoizee from 'memoizee'
+import yolo from 'yolo-tips'
 
-const API_ROOT = '/api'
+const MINUTE = 1000 * 60
+const jsonSearch = (jsonOptions, cb) => {
+  const options = JSON.parse(jsonOptions)
+  yolo(options, cb)
+}
 
-export default function (options) {
-  return axios.get(API_ROOT + `/search?` + qs.stringify(options))
-    .then(({data}) => data)
+const search = memoizee(jsonSearch, { async: true, maxAge: 30 * MINUTE, max: 2048 })
+export default function (options, cb) {
+  search(JSON.stringify(options), (err, results) => {
+    if (err) {
+      return cb(err)
+    }
+
+    cb(null, results)
+  })
 }
