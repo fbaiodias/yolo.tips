@@ -1,3 +1,5 @@
+var webpack = require('webpack')
+
 module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx']
@@ -11,7 +13,19 @@ module.exports = {
     publicPath: '/'
   },
   plugins: [
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      }
+    })
   ],
+  node: {
+    net: 'empty',
+    tls: 'empty',
+    dns: 'empty'
+  },
   module: {
     loaders: [
       {
