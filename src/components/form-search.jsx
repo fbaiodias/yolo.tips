@@ -24,19 +24,26 @@ export default class FormSearch extends Component {
     this.handleOriginChange = this.handleOriginChange.bind(this)
     this.toggleDetails = this.toggleDetails.bind(this)
 
+    const { defaultValue = {} } = props
+
     this.state = {
-      weeks: '1',
-      max: '100',
-      currency: 'EUR',
+      weeks: defaultValue.weeks || '1',
+      max: defaultValue.max || '100',
+      currency: defaultValue.currency || 'EUR',
+      origin: defaultValue.origin,
       showDetails: false
     }
   }
 
-  componentWillMount () {
-    nearestAirport().then((airport) => {
-      this.setState({ origin: airport.iata })
+  componentDidMount () {
+    if (!this.state.origin) {
+      nearestAirport().then((airport) => {
+        this.setState({ origin: airport.iata })
+        this.handleSubmit()
+      })
+    } else {
       this.handleSubmit()
-    })
+    }
   }
 
   getValue () {

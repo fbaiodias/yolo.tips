@@ -6,14 +6,19 @@ import { Button } from 'react-bootstrap'
 import Signup from './signup'
 import yoloImage from '../../static/yolo.gif'
 import { trackSearch } from '../services/analytics'
+import qs from 'qs'
 
 export default class Root extends Component {
   constructor (props) {
     super(props)
     this.toggleSignup = this.toggleSignup.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+
+    const queryString = document.location.search.slice(1)
+
     this.state = {
-      showSignup: false
+      showSignup: false,
+      query: qs.parse(queryString)
     }
   }
 
@@ -21,6 +26,11 @@ export default class Root extends Component {
     this.setState({
       options: options
     })
+
+    if (window.history.pushState) {
+      const url = '?' + qs.stringify(options)
+      window.history.pushState({ path: url }, '', url)
+    }
 
     trackSearch(options)
   }
@@ -56,7 +66,7 @@ export default class Root extends Component {
           </div>
         </div>
         <div className='container'>
-          <FormSearch onSubmit={this.handleSubmit}/>
+          <FormSearch defaultValue={this.state.query} onSubmit={this.handleSubmit}/>
           {content}
           <Signup show={this.state.showSignup} onHide={this.toggleSignup} />
         </div>
