@@ -8,7 +8,7 @@ import unique from 'lodash.uniq'
 import search from '../services/search'
 
 export default class Results extends Component {
-  static propPypes = {
+  static propTypes = {
     options: PropTypes.shape({
       origin: PropTypes.string.isRequired
     }).isRequired

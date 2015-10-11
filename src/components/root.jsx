@@ -5,6 +5,7 @@ import FormSearch from './form-search'
 import { Button } from 'react-bootstrap'
 import Signup from './signup'
 import yoloImage from '../../static/yolo.gif'
+import { trackSearch } from '../services/analytics'
 
 export default class Root extends Component {
   constructor (props) {
@@ -20,6 +21,8 @@ export default class Root extends Component {
     this.setState({
       options: options
     })
+
+    trackSearch(options)
   }
 
   toggleSignup () {

@@ -8,7 +8,7 @@ import currencies from '../consts/currencies'
 const mappedCurrencies = indexBy(currencies, 'value')
 
 export default class ResultItem extends Component {
-  static propPypes = {
+  static propTypes = {
     results: React.PropTypes.arrayOf({
       url: PropTypes.string.isRequired,
       oubound: PropTypes.shape({

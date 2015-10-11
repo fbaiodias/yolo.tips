@@ -1,4 +1,3 @@
-import values from 'lodash.mapvalues'
 import React, { Component, PropTypes } from 'react'
 import { Input, Button, DropdownButton, MenuItem, Row, Col } from 'react-bootstrap'
 import Select from 'react-select'
@@ -41,9 +40,13 @@ export default class FormSearch extends Component {
   }
 
   getValue () {
-    const value = values(this.refs, (value) => (value.getValue && value.getValue() || this.state[value]))
-    value.currency = this.state.currency
-    value.origin = this.state.origin
+    const value = {
+      origin: this.state.origin,
+      weeks: this.refs.weeks && this.refs.weeks.getValue() || this.state.weeks,
+      max: this.refs.max && this.refs.max.getValue() || this.state.max,
+      currency: this.state.currency
+    }
+
     return value
   }
 
