@@ -5,6 +5,7 @@ import Item from './result-item'
 import get from 'lodash.get'
 import group from 'lodash.groupby'
 import unique from 'lodash.uniq'
+import isEqual from 'lodash.isequal'
 import search from '../services/search'
 
 export default class Results extends Component {
@@ -27,7 +28,9 @@ export default class Results extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    this.search(nextProps.options)
+    if (!isEqual(this.props, nextProps)) {
+      this.search(nextProps.options)
+    }
   }
 
   componentDidMount () {
