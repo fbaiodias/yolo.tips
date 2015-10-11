@@ -4,6 +4,7 @@ import moment from 'moment'
 import Icon from 'react-fa'
 import indexBy from 'lodash.indexby'
 import currencies from '../consts/currencies'
+import { trackClick } from '../services/analytics'
 
 const mappedCurrencies = indexBy(currencies, 'value')
 
@@ -42,7 +43,7 @@ export default class ResultItem extends Component {
       ? this.props.results : this.props.results.slice(0, 1)
     const content = results.map((result) => (
       <ListGroupItem>
-        <a href={result.url} target='_blank' title='Click to view on skyscanner'>
+        <a href={result.url} target='_blank' title='Click to view on skyscanner' onClick={ () => trackClick(result) }>
           <Icon name='share' />
           <h4>{`${moment(result.outbound.departureDate).fromNow()} for ~${Math.round(result.price)}${mappedCurrencies[result.currencyId].shortLabel}`}</h4>
           <p>
