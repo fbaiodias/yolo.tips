@@ -8,6 +8,9 @@ import { trackClick } from '../services/analytics'
 
 const mappedCurrencies = indexBy(currencies, 'value')
 
+const getIdFromResult = (result) =>
+  `${result.outbound.to.city}-${result.outbound.to.country}`.toLowerCase().replace(' ', '-')
+
 export default class ResultItem extends Component {
   static propTypes = {
     results: React.PropTypes.arrayOf({
@@ -26,8 +29,13 @@ export default class ResultItem extends Component {
 
   constructor (props) {
     super(props)
+
+    const { results = [] } = props
+
+    const isExpanded = results[0] && document.location.hash === '#' + getIdFromResult(results[0])
+
     this.state = {
-      isExpanded: false
+      isExpanded
     }
     this.toggle = this.toggle.bind(this)
   }
@@ -74,7 +82,7 @@ export default class ResultItem extends Component {
         </ListGroupItem>
       )
     }
-    const id = `${results[0].outbound.to.city}-${results[0].outbound.to.country}`.toLowerCase().replace(' ', '-')
+    const id = getIdFromResult(results[0])
     const title = (
       <a id={id} href={`#${id}`}>
         <Icon name='plane' />
