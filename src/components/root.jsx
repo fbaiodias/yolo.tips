@@ -28,7 +28,7 @@ export default class Root extends Component {
     })
 
     if (window.history.pushState) {
-      const url = '?' + qs.stringify(options)
+      const url = '?' + qs.stringify(options) + document.location.hash
       window.history.pushState({ path: url }, '', url)
     }
 

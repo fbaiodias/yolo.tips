@@ -143,11 +143,34 @@ a {
       padding: 10px 15px;
     }
   }
+
   .panel {
     border: 1px solid #efefef;
     border-radius: 2px;
     -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+
+    .panel-heading {
+      padding: 0;
+
+      a {
+        display: block;
+        position: relative;
+        padding: 10px 15px;
+        color: white;
+        background-color: #222;
+
+        .fa-link {
+          position: absolute;
+          right: 0;
+          opacity: 0;
+        }
+
+        &:hover .fa-link {
+          opacity: 1;
+        }
+      }
+    }
 
     .fa-share {
       display: none;

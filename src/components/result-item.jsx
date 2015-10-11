@@ -65,13 +65,23 @@ export default class ResultItem extends Component {
     let extra
     if (this.props.results.length > 1) {
       const text = this.state.isExpanded ? 'less' : 'more'
+      const icon = this.state.isExpanded ? 'chevron-up' : 'chevron-down'
       extra = (
         <ListGroupItem>
-          <a onClick={this.toggle}>show {text}</a>
+          <a onClick={this.toggle}>
+            <Icon name={icon} /> show {text} flights
+          </a>
         </ListGroupItem>
       )
     }
-    const title = `Go to ${results[0].outbound.to.city}, ${results[0].outbound.to.country}`
+    const id = `${results[0].outbound.to.city}-${results[0].outbound.to.country}`.toLowerCase().replace(' ', '-')
+    const title = (
+      <a id={id} href={`#${id}`}>
+        <Icon name='plane' />
+        {` Go to ${results[0].outbound.to.city}, ${results[0].outbound.to.country}`}
+        <Icon name='link' />
+      </a>
+    )
     return (
       <Col xs={12} md={12}>
         <Panel bsStyle='primary' header={title}>
