@@ -1,0 +1,37 @@
+{
+  "config": {
+    "target": "http://localhost:3000",
+    "phases": [
+      { "duration": 30, "arrivalRate": 10 }
+    ]
+  },
+  "scenarios": [
+    {
+      "flow": [
+        { "get": { "url": "/api/search?origin=LIS&weeks=2&max=100&currency=EUR" }},
+        { "think": 1 },
+        { "get": { "url": "/api/search?origin=LIS&weeks=8&max=100&currency=EUR" }},
+        { "think": 1 },
+        { "get": { "url": "/api/search?origin=LIS&weeks=1&max=100&currency=EUR" }}
+      ]
+    },
+    {
+      "flow": [
+        { "get": { "url": "/api/search?origin=LON&weeks=2&max=100&currency=EUR" }},
+        { "think": 1 },
+        { "get": { "url": "/api/search?origin=LON&weeks=8&max=100&currency=EUR" }},
+        { "think": 1 },
+        { "get": { "url": "/api/search?origin=LON&weeks=1&max=100&currency=EUR" }}
+      ]
+    },
+    {
+      "flow": [
+        { "get": { "url": "/api/search?origin=AMS&weeks=2&max=100&currency=EUR" }},
+        { "think": 1 },
+        { "get": { "url": "/api/search?origin=AMS&weeks=8&max=100&currency=EUR" }},
+        { "think": 1 },
+        { "get": { "url": "/api/search?origin=AMS&weeks=1&max=100&currency=EUR" }}
+      ]
+    }
+  ]
+}
