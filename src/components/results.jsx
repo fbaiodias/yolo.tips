@@ -98,8 +98,8 @@ export default class Results extends Component {
     }
 
     if (results.length > 0) {
-      const grouped = group(results, (result) => get(result, 'outbound.to.airportCode'))
-      const order = unique(results.map((result) => get(result, 'outbound.to.airportCode')))
+      const grouped = group(results, (result) => get(result, 'outbound.to.city'))
+      const order = unique(results.map((result) => get(result, 'outbound.to.city')))
       const content = order.map((key) => (
         <Item results={ grouped[key] }/>
       ))
