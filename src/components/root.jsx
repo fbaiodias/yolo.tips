@@ -2,18 +2,29 @@ import React, { Component } from 'react'
 import Icon from 'react-fa'
 import Results from './results'
 import FormSearch from './form-search'
+import { Button } from 'react-bootstrap'
+import Signup from './signup'
 import yoloImage from '../../static/yolo.gif'
 
 export default class Root extends Component {
   constructor (props) {
     super(props)
-    this.state = {}
+    this.toggleSignup = this.toggleSignup.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.state = {
+      showSignup: false
+    }
   }
 
   handleSubmit (options) {
     this.setState({
       options: options
+    })
+  }
+
+  toggleSignup () {
+    this.setState({
+      showSignup: !this.state.showSignup
     })
   }
 
@@ -44,7 +55,11 @@ export default class Root extends Component {
         <div className='container'>
           <FormSearch onSubmit={this.handleSubmit}/>
           {content}
+          <Signup show={this.state.showSignup} onHide={this.toggleSignup} />
         </div>
+        <Button bsSize='large' bsStyle='primary' onClick={this.toggleSignup} className='subscribe'>
+          <Icon name='envelope' /> Subscribe
+        </Button>
       </div>
     )
   }
