@@ -6,6 +6,7 @@ import get from 'lodash.get'
 import group from 'lodash.groupby'
 import unique from 'lodash.uniq'
 import isEqual from 'lodash.isequal'
+import sort from 'lodash.sortby'
 import search from '../services/search'
 
 export default class Results extends Component {
@@ -101,7 +102,7 @@ export default class Results extends Component {
       const grouped = group(results, (result) => get(result, 'outbound.to.city'))
       const order = unique(results.map((result) => get(result, 'outbound.to.city')))
       const content = order.map((key) => (
-        <Item results={ grouped[key] }/>
+        <Item results={ sort(grouped[key], 'price') }/>
       ))
 
       return (
